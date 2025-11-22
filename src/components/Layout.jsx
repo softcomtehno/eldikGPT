@@ -42,7 +42,7 @@ export default function Layout({ children }) {
           </Link>
         </NavbarBrand>
         <NavbarContent justify="end">
-          <NavbarItem>
+          <NavbarItem className="hidden md:flex">
             <Button
               as={Link}
               to="/"
@@ -53,6 +53,7 @@ export default function Layout({ children }) {
               Ассистенты
             </Button>
           </NavbarItem>
+
           <NavbarItem>
             <Dropdown>
               <DropdownTrigger>
@@ -61,7 +62,7 @@ export default function Layout({ children }) {
                   className="flex items-center gap-2"
                   startContent={
                     <Avatar
-                      name={user?.fullName || user?.email}
+                      // name={user?.fullName || user?.email}
                       size="sm"
                       className="bg-blue-500"
                     />

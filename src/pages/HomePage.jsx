@@ -133,9 +133,9 @@ export default function HomePage() {
 
   return (
     <div className="max-w-[1024px] mx-auto">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-8 flex-col gap-2 md:flex-row ">
         <div>
-          <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-2">
+          <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-2 text-center md:text-left">
             ИИ Ассистенты
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
