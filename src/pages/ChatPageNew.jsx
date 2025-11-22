@@ -312,12 +312,20 @@ export default function ChatPageNew() {
 
     if (!chatIdToUse) {
       try {
-        // Создаем чат с временным названием
-        const newChat = await createChat('Новый чат', assistant.id)
+        // Название = первое сообщение (до 50 символов)
+        const chatName =
+          messageText.length > 50
+            ? messageText.substring(0, 50) + '...'
+            : messageText
+
+        // Создаем чат сразу с правильным названием
+        const newChat = await createChat(chatName, assistant.id)
+
         chatIdToUse = newChat.id
         setCurrentChatId(chatIdToUse)
+
         navigate(`/chat/${assistantId}/${chatIdToUse}`, { replace: true })
-        isNewChat = true
+
         await loadChatsList()
       } catch (error) {
         console.error('Error creating chat:', error)
@@ -340,19 +348,19 @@ export default function ChatPageNew() {
     })
 
     // Если это новый чат, обновляем название первым сообщением
-    if (isNewChat) {
-      try {
-        // Обрезаем сообщение до 50 символов для названия
-        const chatName =
-          messageText.length > 50
-            ? messageText.substring(0, 50) + '...'
-            : messageText
-        await updateChatName(chatIdToUse, chatName)
-        await loadChatsList() // Обновляем список чатов
-      } catch (error) {
-        console.error('Error updating chat name:', error)
-      }
-    }
+    // if (isNewChat) {
+    //   try {
+    //     // Обрезаем сообщение до 50 символов для названия
+    //     const chatName =
+    //       messageText.length > 50
+    //         ? messageText.substring(0, 50) + '...'
+    //         : messageText
+    //     await updateChatName(chatIdToUse, chatName)
+    //     await loadChatsList() // Обновляем список чатов
+    //   } catch (error) {
+    //     console.error('Error updating chat name:', error)
+    //   }
+    // }
 
     if (!wsRef.current || !isConnected) {
       connectWebSocket()
